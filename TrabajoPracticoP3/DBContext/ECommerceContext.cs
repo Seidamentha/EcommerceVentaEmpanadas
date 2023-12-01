@@ -25,7 +25,7 @@ namespace TrabajoPracticoP3.DBContext
             modelBuilder.Entity<Admin>().HasData(new Admin
             {
                 Id = 1,
-                Name = "Juan",
+                Name = "Amentha",
                 SurName = "Perez",
                 Email = "JuanPerez@gmail.com",
                 UserName = "JuancitoPerez",

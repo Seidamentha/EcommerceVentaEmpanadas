@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/TrabajoPracticoP3.csproj": {}
+    "/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/TrabajoPracticoP3.csproj": {}
   },
   "projects": {
-    "/Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/TrabajoPracticoP3.csproj": {
+    "/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/TrabajoPracticoP3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/TrabajoPracticoP3.csproj",
+        "projectUniqueName": "/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/TrabajoPracticoP3.csproj",
         "projectName": "TrabajoPracticoP3",
-        "projectPath": "/Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/TrabajoPracticoP3.csproj",
+        "projectPath": "/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/TrabajoPracticoP3.csproj",
         "packagesPath": "/Users/frantztha/.nuget/packages/",
-        "outputPath": "/Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/obj/",
+        "outputPath": "/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/frantztha/.nuget/NuGet/NuGet.Config"

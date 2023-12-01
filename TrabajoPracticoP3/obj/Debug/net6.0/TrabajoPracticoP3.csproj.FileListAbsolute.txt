@@ -1071,3 +1071,13 @@ C:/Users/Malef/OneDrive/Escritorio/TPC#/TrabajoPractico-Programacion3/TPI-Prog3/
 /Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.dll
 /Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/obj/Debug/net6.0/refint/TrabajoPracticoP3.dll
 /Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.pdb
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.csproj.AssemblyReference.cache
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.GeneratedMSBuildEditorConfig.editorconfig
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.AssemblyInfoInputs.cache
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.AssemblyInfo.cs
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.csproj.CoreCompileInputs.cache
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.MvcApplicationPartsAssemblyInfo.cs
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.MvcApplicationPartsAssemblyInfo.cache
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.dll
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/refint/TrabajoPracticoP3.dll
+/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/obj/Debug/net6.0/TrabajoPracticoP3.pdb

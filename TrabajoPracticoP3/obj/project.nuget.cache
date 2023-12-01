@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HhnTEGn6Ivh+e/qAPA9hFkdDsA9HtMNuU0TqpcR5IX6GYsMq1zOoxIMIPWFrZ2uD2fGvDsyJm0unBVN9FGyqWw==",
+  "dgSpecHash": "kd15Jm4tiE0IaoJd/9XFE8F94F56woWdXbHQs6oK4hCQ242pLBZCdkZGnXOlGDhPIYYUnkc5CvGtr8AcD+r/Bw==",
   "success": true,
-  "projectFilePath": "/Users/frantztha/Downloads/utn/TPI-Prog3/TrabajoPracticoP3/TrabajoPracticoP3/TrabajoPracticoP3.csproj",
+  "projectFilePath": "/Users/frantztha/Desktop/EcommerceVentaEmpanadas/TrabajoPracticoP3/TrabajoPracticoP3.csproj",
   "expectedPackageFiles": [
     "/Users/frantztha/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/frantztha/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
