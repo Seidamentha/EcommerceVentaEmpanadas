@@ -1,0 +1,24 @@
+﻿<Properties StartupConfiguration="{E522DCD9-EE79-43AD-A3A7-7DB9F65BE999}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TrabajoPracticoP3" expanded="True">
+            <Node name="TrabajoPracticoP3" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="DBContext" expanded="True" />
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.TrabajoPracticoP3 PreferredExecutionTarget="/Applications/Safari.app" />
+</Properties>
