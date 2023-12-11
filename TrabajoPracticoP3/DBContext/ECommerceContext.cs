@@ -1,5 +1,6 @@
 ﻿    using Microsoft.EntityFrameworkCore;
 using TrabajoPracticoP3.Data.Entities;
+using TrabajoPracticoP3.Data.Enum;
 
 namespace TrabajoPracticoP3.DBContext
 {
@@ -26,10 +27,10 @@ namespace TrabajoPracticoP3.DBContext
             {
                 Id = 1,
                 Name = "Amentha",
-                SurName = "Perez",
-                Email = "JuanPerez@gmail.com",
-                UserName = "JuancitoPerez",
-                UserType = "Admin",
+                SurName = "Seide",
+                Email = "Amentha@gmail.com",
+                UserName = "Tatie",
+                UserType = UserType.Admin,
                 Password = "987654"
 
             });
@@ -38,11 +39,11 @@ namespace TrabajoPracticoP3.DBContext
                 new Client
                 {
                     Id = 2,
-                    Name = "Ernesto",
-                    SurName = "Gutierrez",
-                    Email = "Erne22@gmail.com",
-                    UserName = "ElGuason21",
-                    UserType = "Client",
+                    Name = "Sofia",
+                    SurName = "Mazzurco",
+                    Email = "Sofi@gmail.com",
+                    UserName = "Tutti",
+                    UserType = UserType.Client,
                     Password = "123321",
                     PhoneNumber = "3415123212",
                     Adress = "Pellegrini 211"
@@ -50,11 +51,11 @@ namespace TrabajoPracticoP3.DBContext
                 new Client
                 {
                     Id = 3,
-                    Name = "Sebastuan",
-                    SurName = "Gonzalez",
-                    Email = "Seba25@gmail.com",
-                    UserName = "Batman21",
-                    UserType = "Client",
+                    Name = "Guido",
+                    SurName = "Montenegro",
+                    Email = "Guido@gmail.com",
+                    UserName = "Monzón",
+                    UserType = UserType.Client,
                     Password = "554466",
                     PhoneNumber = "3415123333",
                     Adress = "Mendoza 211"
@@ -64,21 +65,21 @@ namespace TrabajoPracticoP3.DBContext
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
-                    Id = 1,
-                    Name = "Pizza de Muzzarella",
-                    Price = "3000"
+                    IdProduct = 1,
+                    NameProduct = "Empanada de verduras",
+                    Price = 300
                 },
                 new Product
                 {
-                    Id = 2,
-                    Name = "Pizza de Jamon",
-                    Price = "3500"
+                    IdProduct= 2,
+                    NameProduct= "Emoanada de JAmón y Queso",
+                    Price = 500
                 },
                 new Product
                 {
-                    Id = 3,
-                    Name = "Pizza de Pepperoni",
-                    Price = "4000"
+                    IdProduct = 3,
+                    NameProduct = "Empanada de Carne",
+                    Price = 400
                 }
             );
 
@@ -89,10 +90,9 @@ namespace TrabajoPracticoP3.DBContext
                 .WithMany()
                 .HasForeignKey(op => op.ProductId);
 
-            modelBuilder.Entity<SaleOrderLine>() 
-                .HasOne(o => o.Order)
-                .WithMany()
-                .HasForeignKey(op => op.OrderId);  
+            modelBuilder.Entity<SaleOrderLine>()
+                .HasOne(sol => sol.Order)
+                .WithOne();
 
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Client)

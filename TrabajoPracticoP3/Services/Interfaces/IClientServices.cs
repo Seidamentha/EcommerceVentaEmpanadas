@@ -9,7 +9,5 @@ namespace TrabajoPracticoP3.Services.Interfaces
         public int CreateClient(User user);
         public void UpdateClient(Client client);
         public void DeleteUser(User user);
-        public void HighLogicUser(User user);
-        public void LowLogicUser(User user);
-    }
+    }   
 }

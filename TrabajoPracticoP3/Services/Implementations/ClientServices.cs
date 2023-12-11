@@ -37,11 +37,7 @@ namespace TrabajoPracticoP3.Services.Implementations
 
         }
 
-        public void HighLogicUser(User user)
-        {
-            _context.Update(user);
-            _context.SaveChanges();
-        }
+       
 
         public void DeleteUser(User user)
         {
@@ -49,11 +45,7 @@ namespace TrabajoPracticoP3.Services.Implementations
             _context.SaveChanges();
         }
 
-        public void LowLogicUser(User user)
-        {
-            _context.Update(user);
-            _context.SaveChanges();
-        }
+        
 
     }
 }

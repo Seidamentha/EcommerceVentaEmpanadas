@@ -67,22 +67,22 @@ namespace TrabajoPracticoP3.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Pizza de Muzzarella",
-                            Price = "3000",
+                            Name = "Empanada de Verduras",
+                            Price = "300",
                             State = true
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Pizza de Jamon",
-                            Price = "3500",
+                            Name = "Empanada de Jamon y queso",
+                            Price = "250",
                             State = true
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Pizza de Pepperoni",
-                            Price = "4000",
+                            Name = "Empanada de Carne",
+                            Price = "400",
                             State = true
                         });
                 });
@@ -167,12 +167,12 @@ namespace TrabajoPracticoP3.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "JuanPerez@gmail.com",
-                            Name = "Juan",
+                            Email = "Amentha@gmail.com",
+                            Name = "Amentha",
                             Password = "987654",
                             State = true,
-                            SurName = "Perez",
-                            UserName = "JuancitoPerez",
+                            SurName = "Seide",
+                            UserName = "Tatie",
                             UserType = "Admin"
                         });
                 });
@@ -193,24 +193,24 @@ namespace TrabajoPracticoP3.Migrations
                         new
                         {
                             Id = 2,
-                            Email = "Erne22@gmail.com",
-                            Name = "Ernesto",
+                            Email = "Sofi@gmail.com",
+                            Name = "Sofia",
                             Password = "123321",
                             State = true,
-                            SurName = "Gutierrez",
-                            UserName = "ElGuason21",
+                            SurName = "Mazzurco",
+                            UserName = "Tutti",
                             UserType = "Client",
                             PhoneNumber = "3415123212"
                         },
                         new
                         {
                             Id = 3,
-                            Email = "Seba25@gmail.com",
-                            Name = "Sebastuan",
+                            Email = "Guido@gmail.com",
+                            Name = "Guido",
                             Password = "554466",
                             State = true,
-                            SurName = "Gonzalez",
-                            UserName = "Batman21",
+                            SurName = "Montenegro",
+                            UserName = "monzón1",
                             UserType = "Client",
                             PhoneNumber = "3415123333"
                         });

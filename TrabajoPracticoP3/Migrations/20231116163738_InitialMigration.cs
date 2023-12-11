@@ -107,23 +107,23 @@ namespace TrabajoPracticoP3.Migrations
                 columns: new[] { "Id", "Name", "Price", "State" },
                 values: new object[,]
                 {
-                    { 1, "Pizza de Muzzarella", "3000", true },
-                    { 2, "Pizza de Jamon", "3500", true },
-                    { 3, "Pizza de Pepperoni", "4000", true }
+                    { 1, "Empanada de Verduras", "300", true },
+                    { 2, "Empanada de Jamón y Queso", "3500", true },
+                    { 3, "Empanada de Carne", "4000", true }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Adress", "Email", "Name", "Password", "State", "SurName", "UserName", "UserType" },
-                values: new object[] { 1, null, "JuanPerez@gmail.com", "Juan", "987654", true, "Perez", "JuancitoPerez", "Admin" });
+                values: new object[] { 1, null, "amentha@gmail.com", "Amentha", "987654", true, "Seide", "Tatie", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Adress", "City", "Email", "Name", "Password", "PhoneNumber", "State", "SurName", "UserName", "UserType" },
                 values: new object[,]
                 {
-                    { 2, null, null, "Erne22@gmail.com", "Ernesto", "123321", "3415123212", true, "Gutierrez", "ElGuason21", "Client" },
-                    { 3, null, null, "Seba25@gmail.com", "Sebastuan", "554466", "3415123333", true, "Gonzalez", "Batman21", "Client" }
+                    { 2, null, null, "Sofi@gmail.com", "Sofi", "123321", "3415123212", true, "Mazzurco", "Tutti", "Client" },
+                    { 3, null, null, "Guido@gmail.com", "Guido", "554466", "3415123333", true, "Montenegro", "Monzón", "Client" }
                 });
 
             migrationBuilder.CreateIndex(

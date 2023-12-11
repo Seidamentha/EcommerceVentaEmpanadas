@@ -1,16 +1,68 @@
 ﻿<Properties StartupConfiguration="{E522DCD9-EE79-43AD-A3A7-7DB9F65BE999}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TrabajoPracticoP3 PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="TrabajoPracticoP3/Program.cs">
+    <Files>
+      <File FileName="TrabajoPracticoP3/Data/Entities/Order.cs" Line="3" Column="35" IsPinned="True" />
+      <File FileName="TrabajoPracticoP3/Controllers/AuthenticateController.cs" Line="52" Column="50" />
+      <File FileName="TrabajoPracticoP3/Controllers/ClientController.cs" Line="123" Column="1" />
+      <File FileName="TrabajoPracticoP3/Controllers/OrderController.cs" Line="4" Column="35" />
+      <File FileName="TrabajoPracticoP3/Controllers/SaleOrderLineController.cs" Line="81" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Entities/Admin.cs" Line="7" Column="2" />
+      <File FileName="TrabajoPracticoP3/Data/Entities/Client.cs" Line="10" Column="2" />
+      <File FileName="TrabajoPracticoP3/Data/Entities/Product.cs" Line="22" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Entities/SaleOrderLine.cs" Line="23" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Entities/User.cs" Line="43" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Enum/OrderState.cs" Line="1" Column="11" />
+      <File FileName="TrabajoPracticoP3/Data/Models/ClientPostDto.cs" Line="16" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Models/ClientUpdateDto.cs" Line="1" Column="1" />
+      <File FileName="TrabajoPracticoP3/DBContext/ECommerceContext.cs" Line="20" Column="1" />
+      <File FileName="TrabajoPracticoP3/Migrations/20231116163738_InitialMigration.cs" Line="18" Column="7" />
+      <File FileName="TrabajoPracticoP3/Migrations/ContextModelSnapshot.cs" Line="236" Column="39" />
+      <File FileName="TrabajoPracticoP3/Controllers/AdminController.cs" Line="90" Column="14" />
+      <File FileName="TrabajoPracticoP3/Program.cs" Line="40" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Models/CredentialsDto.cs" Line="1" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Models/OrderPostDto.cs" Line="13" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Models/ProductPostDto.cs" Line="1" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Models/ProductUpdateDto.cs" Line="9" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Models/SaleOrderLinePostDto.cs" Line="13" Column="1" />
+      <File FileName="TrabajoPracticoP3/Services/Implementations/AdminServices.cs" Line="27" Column="43" />
+      <File FileName="TrabajoPracticoP3/Services/Implementations/ClientServices.cs" Line="48" Column="9" />
+      <File FileName="TrabajoPracticoP3/Services/Implementations/SaleOrderLineServices.cs" Line="15" Column="10" />
+      <File FileName="TrabajoPracticoP3/Properties/launchSettings.json" Line="21" Column="7" />
+      <File FileName="TrabajoPracticoP3/Services/Interfaces/IUserServices.cs" Line="20" Column="1" />
+      <File FileName="TrabajoPracticoP3/Services/Interfaces/IAdminServices.cs" Line="16" Column="1" />
+      <File FileName="TrabajoPracticoP3/Services/Interfaces/IClientServices.cs" Line="14" Column="1" />
+      <File FileName="TrabajoPracticoP3/Services/Interfaces/IOrderServices.cs" Line="12" Column="1" />
+      <File FileName="TrabajoPracticoP3/Services/Interfaces/ISaleOrderLineServices.cs" Line="3" Column="1" />
+      <File FileName="TrabajoPracticoP3/Services/Implementations/OrderServices.cs" Line="14" Column="13" />
+      <File FileName="TrabajoPracticoP3/Services/Implementations/UserServices.cs" Line="31" Column="38" />
+      <File FileName="TrabajoPracticoP3/Controllers/ProductController.cs" Line="10" Column="40" />
+      <File FileName="TrabajoPracticoP3/Data/Models/AdminPostDto.cs" Line="12" Column="43" />
+      <File FileName="TrabajoPracticoP3/Data/Models/BaseResponse.cs" Line="11" Column="1" />
+      <File FileName="TrabajoPracticoP3/Data/Models/UserPutDto.cs" Line="9" Column="3" />
+      <File FileName="TrabajoPracticoP3/Data/Enum/StateUser.cs" Line="11" Column="1" />
+      <File FileName="TrabajoPracticoP3/Services/Implementations/ProductServices.cs" Line="20" Column="35" />
+      <File FileName="TrabajoPracticoP3/Services/Interfaces/IProductServices.cs" Line="15" Column="2" />
+      <File FileName="TrabajoPracticoP3/Data/Models/ProductDto.cs" Line="11" Column="49" />
+      <File FileName="TrabajoPracticoP3/appsettings.json" Line="13" Column="22" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="TrabajoPracticoP3" expanded="True">
-            <Node name="TrabajoPracticoP3" expanded="True">
+          <Node name="TrabajoPracticoP3">
+            <Node name="TrabajoPracticoP3">
               <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True">
+                <Node name="Entities" expanded="True" />
+              </Node>
               <Node name="DBContext" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Properties" expanded="True" />
               <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
@@ -18,7 +70,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.TrabajoPracticoP3 PreferredExecutionTarget="/Applications/Safari.app" />
 </Properties>

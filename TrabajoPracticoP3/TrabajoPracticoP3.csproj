@@ -24,11 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="TrabajoPracticoP3.db" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="TrabajoPracticoP3.db">
+    <None Update="TrabajoPracticoP3.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    </None>
   </ItemGroup>
 </Project>

@@ -7,13 +7,13 @@ namespace TrabajoPracticoP3.Data.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int IdProduct { get; set; }
 
-        [Required]
-        public string? Name { get; set; }
+        
+        public string? NameProduct { get; set; }
 
-        [Required]
-        public string? Price { get; set; }
+        
+        public decimal Price { get; set; }
 
         public bool State { get; set; } = true;
 

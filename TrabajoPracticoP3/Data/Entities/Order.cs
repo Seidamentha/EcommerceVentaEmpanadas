@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using TPI_P3_grupal.Data.Enum;
+using TrabajoPracticoP3.Data.Enum;
 
 namespace TrabajoPracticoP3.Data.Entities
 {

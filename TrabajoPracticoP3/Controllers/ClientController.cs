@@ -1,139 +1,122 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Sockets;
+﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Models;
-using TrabajoPracticoP3.Services.Implementations;
 using TrabajoPracticoP3.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TrabajoPracticoP3.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/client")]
     [ApiController]
     [Authorize]
     public class ClientController : ControllerBase
     {
-        private readonly IClientServices _clientService;
+        private readonly IAdminServices _adminServices;
+        private readonly IUserServices _userServices;
+        private readonly IOrderServices _orderServices;
+        private readonly IClientServices _clientServices;
+        private readonly IProductServices _productServices;
 
-        public ClientController(IClientServices clientService)
+        public ClientController(IUserServices userServices, IAdminServices adminServices, IOrderServices orderServices, IClientServices clientServices, IProductServices productServices)
         {
-            _clientService = clientService;
+            _adminServices = adminServices;
+            _userServices = userServices;
+            _orderServices = orderServices;
+            _clientServices = clientServices;
+            _productServices = productServices;
         }
-
 
         [HttpGet("GetClients")]
         public IActionResult GetClients()
         {
-            string role = User.Claims.SingleOrDefault(c => c.Type.Contains("role")).Value;
-            if (role == "Admin")
-                return Ok(_clientService.GetClients());
-            return Forbid();
+            try
+            {
+                string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+                if (role == "Admin")
+                {
+                    var res = _adminServices.GetClients();
+                    if (res == null)
+                    {
+                        return BadRequest(res);
+                    }
+                    return Ok(res);
+                }
+                return Forbid();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error interno del servidor: " + ex.Message);
+            }
         }
 
-
-        [HttpPost("NewClient")]
-        public IActionResult CreateClient([FromBody] ClientPostDto dto)
+        [HttpPost("CreateClient")]
+        public IActionResult CreateClient([FromBody] AdminPostDto adminDto)
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
-            if (role == "Client")
+            try
             {
                 var client = new Client()
                 {
-                    Name = dto.Name,
-                    SurName = dto.SurName,
-                    Email = dto.Email,
-                    UserName = dto.UserName,
-                    Password = dto.Password,
-                    UserType = "Client",
-                    Adress = dto.Adress,
-                    PhoneNumber = dto.PhoneNumber
+                    Email = adminDto.Email,
+                    Name = adminDto.Name,
+                    Password = adminDto.Password,
                 };
 
-                int id = _clientService.CreateClient(client);
-
+                int id = _userServices.CreateUser(client);
                 return Ok(id);
             }
-            return Forbid();
-        }
-
-
-        [HttpPut("UpdateClient")]
-        public IActionResult UpdateClient([FromBody] ClientUpdateDto updateClient)
-        {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            Client? uClient = null;
-
-            if (role == "Client")
+            catch (Exception ex)
             {
-                uClient = new Client()
-                {
-                    Id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value),
-                    Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value,
-                    Name = updateClient.Name, 
-                    SurName = updateClient.SurName,
-                    UserName = updateClient.UserName,
-                    UserType = "Client",
-                    Adress = updateClient.Adress,
-                    PhoneNumber = updateClient.PhoneNumber,
-                    Password = updateClient.Password
-                };
+                return StatusCode(500, "Error interno del servidor: " + ex.Message);
             }
-
-            _clientService.UpdateClient(uClient);
-
-            return Ok();
         }
 
-
-        [HttpDelete("DeleteClient")]
-        public IActionResult DeleteUser(int UserId)
+        [HttpDelete("DeleteUser/{userId}")]
+        public IActionResult DeleteUser(int userId)
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
+            try
             {
-                User userToDelete = _clientService.GetUserById(UserId);
-
-                if (userToDelete != null)
-                {
-                    _clientService.DeleteUser(userToDelete);
-                }
-                else
+                if (userId == 0)
                 {
                     return NotFound("Usuario no encontrado");
                 }
+                _userServices.DeleteUser(userId);
+                return NoContent();
             }
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error interno del servidor: " + ex.Message);
+            }
         }
 
-
-        [HttpPut("HighLogic")]
-        public IActionResult HighLogicUser(int userId)
+        [HttpPut("UpdateClient/{ClientId}")]
+        public IActionResult UpdateClient([FromRoute] int ClientId, [FromBody] UserPutDto userDto)
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
+            try
             {
+                var clientToUpdate = new Client()
+                {
+                    Id = ClientId,
+                    Email = userDto.Email,
+                    Name = userDto.Name,
+                    Password = userDto.Password,
+                };
 
-                User logicPutUser = _clientService.GetUserById(userId);
-                logicPutUser.State = true;
-                _clientService.HighLogicUser(logicPutUser);
+                int updatedClientId = _userServices.UpdateUser(clientToUpdate);
+
+                if (updatedClientId == 0)
+                {
+                    return NotFound($"Usuario con ID {ClientId} no encontrado");
+                }
+
+                return Ok(updatedClientId);
             }
-            return NoContent();
-        }
-
-
-        [HttpDelete("LowLogic")]
-        public IActionResult LowLogicUser(int UserId)
-        {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
+            catch (Exception ex)
             {
-                User logicDeleteclient = _clientService.GetUserById(UserId);
-                logicDeleteclient.State = false;
-                _clientService.LowLogicUser(logicDeleteclient);
+                return StatusCode(500, "Error interno del servidor: " + ex.Message);
             }
-            return NoContent();
         }
     }
 }

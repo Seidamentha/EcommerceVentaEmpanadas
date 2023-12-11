@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using TPI_P3_grupal.Data.Enum;
+using TrabajoPracticoP3.Data.Enum;
 using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Models;
 using TrabajoPracticoP3.Services.Interfaces;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SQLitePCL;
+using System;
+using System.Linq;
 using System.Security.Claims;
 using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Models;
@@ -13,140 +14,132 @@ namespace TrabajoPracticoP3.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly IAdminServices _adminService;
-
-        public AdminController(IAdminServices adminService)
+        private readonly IAdminServices _adminServices;
+        private readonly IUserServices _userServices;
+        public AdminController(IAdminServices adminServices, IUserServices userServices)
         {
-            _adminService = adminService;
+            _adminServices = adminServices;
+            _userServices = userServices;
         }
 
-
-        [HttpGet("GetProductId")]
-        public IActionResult GetProductById(int ProductId) 
+        [HttpGet("GetAdmin")]
+        public IActionResult GetAdmins()
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
+
+            try
             {
-                Product ProdId = _adminService.GetProductById(ProductId);
-                return Ok(ProdId);
+                string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
 
-            }
-            return Forbid();
-        }
-
-
-        [HttpGet("GetAllProducts")]
-        public IActionResult GetAllProduct()
-        {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
-            {
-                var products = _adminService.GetAllProduct();
-                if (products != null)
+                var res = _adminServices.GetAdmins();
+                if (role == "Admin")
                 {
-                    return Ok(products);
+
+                    if (res == null)
+                    {
+                        return BadRequest(res);
+                    }
+                    return Ok(res);
                 }
-                return NotFound("No hay nada que mostrar");
+                return Forbid();
+
             }
-            return Forbid();
-        } 
-
-
-        [HttpPost("NewClient")] 
-        public IActionResult AddProduct([FromBody] ProductPostDto dto)  
-        {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
-
+            catch (Exception ex)
             {
-                var product = new Product()
-                {
-                    Name = dto.Name,
-                    Price = dto.Price,
-
-                };
-                int id = _adminService.AddProduct(product);
-
-                return Ok(id);
+                return StatusCode(500, "Error interno del servidor" + ex.Message);
             }
-            return Forbid();
-
         }
 
 
-        [HttpPut("UpdateProduct")]
-        public IActionResult EditProduct(int productId, [FromBody] ProductUpdateDto updateProduct)
+        [HttpPost("CreateAdmin")]
+        public IActionResult CreateAdmin([FromBody] AdminPostDto adminDto)
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-
-            if (role == "Admin")
+            try
             {
-                Product existingProduct = _adminService.GetProductById(productId);
-
-                if (existingProduct != null)
+                string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
+                if (role == "Admin")
                 {
-                    existingProduct.Name = updateProduct.Name;
-                    existingProduct.Price = updateProduct.Price;
 
-                    _adminService.EditProduct(existingProduct);
-                    return Ok();
+                    var res = new Admin()
+                    {
+                        Email = adminDto.Email,
+                        Name = adminDto.Name,
+                        Password = adminDto.Password,
+                    };
+                    if (res == null)
+                    {
+                        return BadRequest(res);
+                    }
+                    int id = _userServices.CreateUser(res);
+                    return Ok(id);
                 }
-                else
-                {
-                    return NotFound("Producto no encontrado");
-                }
+                return Forbid();
+
             }
-            return Forbid();
-        }
-
-
-        [HttpDelete("DeleteProduct")]
-        public IActionResult DeleteProduct(int productId)   
-        {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
+            catch (Exception ex)
             {
-                Product productToDelete = _adminService.GetProductById(productId);
-
-                if (productToDelete != null)
-                {
-                    _adminService.DeleteProduct(productToDelete);
-                }
-                else
-                {
-                    return NotFound("producto no encontrado");
-                }
+                return StatusCode(500, "Error interno del servidor" + ex.Message);
             }
-            return NoContent();
+
         }
 
 
-        [HttpPut("HighLogic")]
-        public IActionResult HighLogicProduct(int productId)
+        [HttpPut("UpdateAdmin/{AdminId}")]
+        public IActionResult UpdateAdmin([FromRoute] int AdminId, [FromBody] UserPutDto userDto)
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
+            try
             {
-                Product logicPutProduct = _adminService.GetProductById(productId);
-                logicPutProduct.State = true;
-                _adminService.HighLogicProduct(logicPutProduct);
+                string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
+                if (role == "Admin")
+                {
+                    var userToUpdate = new Admin()
+                    {
+                        Id = AdminId,
+                        Email = userDto.Email,
+                        Name = userDto.Name,
+                        Password = userDto.Password,
+                    };
+
+                    int updatedUserId = _userServices.UpdateUser(userToUpdate);
+
+                    if (updatedUserId == 0)
+                    {
+                        return NotFound($"Usuario con ID {AdminId} no encontrado");
+                    }
+
+                    return Ok(updatedUserId);
+                }
+                return Forbid();
             }
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error interno del servidor: " + ex.Message);
+            }
         }
 
 
-        [HttpDelete("LowLogic")]
-        public IActionResult DeleteLogicProduct(int productId)
+        [HttpDelete("DeleteUser/{userId}")]
+        public IActionResult DeleteUser(int userId)
         {
-            string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
-            if (role == "Admin")
+            try
             {
-                Product logicDeleteProduct = _adminService.GetProductById(productId);
-                logicDeleteProduct.State = false;
-                _adminService.DeleteLogicProduct(logicDeleteProduct);
+                string role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value.ToString();
+                if (role == "Admin")
+                {
+                    if (userId == 0)
+                    {
+                        return NotFound();
+                    }
+                    _userServices.DeleteUser(userId);
+                    return NoContent();
+                }
+                return Forbid();
+
             }
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error interno del servidor" + ex.Message);
+            }
         }
+
     }
 }
-

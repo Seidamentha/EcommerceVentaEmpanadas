@@ -1,4 +1,4 @@
-﻿namespace TPI_P3_grupal.Data.Enum
+﻿namespace TrabajoPracticoP3.Data.Enum
 {
     public enum OrderState
     {
