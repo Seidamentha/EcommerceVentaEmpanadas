@@ -29,7 +29,7 @@ namespace TrabajoPracticoP3.Services.Implementations
             User? userDelete = _context.Users.FirstOrDefault(u => u.Id == userId);
             if (userDelete != null)
             {
-                userDelete.UserState = Data.Entities.StateUser.Disabled;
+                userDelete.UserState = StateUser.Disabled;
                 
                 _context.Update(userDelete);
                 _context.SaveChanges();

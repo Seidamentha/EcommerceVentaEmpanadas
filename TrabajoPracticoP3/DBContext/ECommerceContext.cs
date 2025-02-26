@@ -1,12 +1,17 @@
-﻿    using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Enum;
+using System.Linq;
+
 
 namespace TrabajoPracticoP3.DBContext
 {
     public class ECommerceContext : DbContext
     {
+        
+
         public DbSet<User> Users { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -20,9 +25,12 @@ namespace TrabajoPracticoP3.DBContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasDiscriminator(u => u.UserType);
+           
+            // Definir la jerarquía de User con Discriminator
+            modelBuilder.Entity<User>()
+                .HasDiscriminator<UserType>("UserType");
 
-
+            // Insertamos datos iniciales en la base de datos
             modelBuilder.Entity<Admin>().HasData(new Admin
             {
                 Id = 1,
@@ -66,40 +74,44 @@ namespace TrabajoPracticoP3.DBContext
                 new Product
                 {
                     IdProduct = 1,
-                    NameProduct = "Empanada de verduras",
+                    Name = "Empanada de verduras",
                     Price = 300
                 },
                 new Product
                 {
                     IdProduct= 2,
-                    NameProduct= "Emoanada de JAmón y Queso",
+                    Name= "Emoanada de JAmón y Queso",
                     Price = 500
                 },
                 new Product
                 {
                     IdProduct = 3,
-                    NameProduct = "Empanada de Carne",
+                    Name = "Empanada de Carne",
                     Price = 400
                 }
             );
 
-            modelBuilder.Entity<User>().HasDiscriminator(u => u.UserType);
 
-            modelBuilder.Entity<SaleOrderLine>()
-                .HasOne(op => op.Product)
-                .WithMany()
-                .HasForeignKey(op => op.ProductId);
-
+            // Relación 1:N entre Order y SaleOrderLine (una orden tiene muchas líneas de pedido)
             modelBuilder.Entity<SaleOrderLine>()
                 .HasOne(sol => sol.Order)
-                .WithOne();
+                .WithMany(o => o.SaleOrderLines) // Una orden puede tener muchas líneas
+                .HasForeignKey(sol => sol.OrderId);
 
+            // Relación 1:N entre Product y SaleOrderLine (un producto puede estar en muchas líneas de pedido)
+            modelBuilder.Entity<SaleOrderLine>()
+                .HasOne(sol => sol.Product)
+                .WithMany(p => p.SaleOrderLines)
+                .HasForeignKey(sol => sol.ProductId);
+
+            // Relación 1:N entre Client y Order (un cliente puede hacer muchas órdenes)
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Client)
-                .WithMany()
+                .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.ClientId);
 
             base.OnModelCreating(modelBuilder);
+
         }
     }
 }

@@ -4,6 +4,8 @@ using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Models;
 using TrabajoPracticoP3.DBContext;
 using TrabajoPracticoP3.Services.Interfaces;
+using TrabajoPracticoP3.Data.Enum;
+
 
 
 namespace TrabajoPracticoP3.Services.Implementations

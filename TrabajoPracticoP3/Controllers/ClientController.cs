@@ -52,16 +52,30 @@ namespace TrabajoPracticoP3.Controllers
             }
         }
 
+        [HttpGet("GetClientById/{clientId}")]
+        public IActionResult GetClientById(int clientId)
+        {
+            try
+            {
+                var client = _clientServices.GetClientById(clientId);
+                return client != null ? Ok(client) : NotFound($"Cliente con ID {clientId} no encontrado.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+            }
+        }
+
         [HttpPost("CreateClient")]
-        public IActionResult CreateClient([FromBody] AdminPostDto adminDto)
+        public IActionResult CreateClient([FromBody] ClientPostDto clientDto)
         {
             try
             {
                 var client = new Client()
                 {
-                    Email = adminDto.Email,
-                    Name = adminDto.Name,
-                    Password = adminDto.Password,
+                    Email = clientDto.Email,
+                    Name = clientDto.Name,
+                    Password = clientDto.Password,
                 };
 
                 int id = _userServices.CreateUser(client);
@@ -73,16 +87,16 @@ namespace TrabajoPracticoP3.Controllers
             }
         }
 
-        [HttpDelete("DeleteUser/{userId}")]
-        public IActionResult DeleteUser(int userId)
+        [HttpDelete("DeleteClient/{clientId}")]
+        public IActionResult DeleteClient(int clientId)
         {
             try
             {
-                if (userId == 0)
+                if (clientId == 0)
                 {
                     return NotFound("Usuario no encontrado");
                 }
-                _userServices.DeleteUser(userId);
+                _userServices.DeleteUser(clientId);
                 return NoContent();
             }
             catch (Exception ex)

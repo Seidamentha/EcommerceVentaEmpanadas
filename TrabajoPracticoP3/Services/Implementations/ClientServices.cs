@@ -1,6 +1,9 @@
 ﻿using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.DBContext;
 using TrabajoPracticoP3.Services.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace TrabajoPracticoP3.Services.Implementations
 {
@@ -18,34 +21,51 @@ namespace TrabajoPracticoP3.Services.Implementations
             return _context.Clients.ToList();
         }
 
-        public Client? GetUserById(int userId)
+        public Client? GetClientById(int clientId)
         {
-            return _context.Clients.FirstOrDefault(u => u.Id == userId);
+            return _context.Clients.FirstOrDefault(c => c.Id == clientId);
         }
 
-        public int CreateClient(User user)
+        public int AddClient(Client client)
         {
-            _context.Add(user);
+            _context.Clients.Add(client);
             _context.SaveChanges();
-            return user.Id;
+            return client.Id;
         }
 
-        public void UpdateClient(Client client)
+        public bool UpdateClient(Client client)
         {
-            _context.Update(client);
+            var existingClient = _context.Clients.SingleOrDefault(c => c.Id == client.Id);
+            if (existingClient == null) return false;
+
+            existingClient.Name = client.Name;
+            existingClient.SurName = client.SurName;
+            existingClient.Email = client.Email;
+            existingClient.UserName = client.UserName;
+            existingClient.Password = client.Password;
+            existingClient.PhoneNumber = client.PhoneNumber;
+            existingClient.Address = client.Address;
+
             _context.SaveChanges();
+            return true;
 
         }
 
        
 
-        public void DeleteUser(User user)
+        public bool DeleteClient(int clientId)
         {
-            _context.Remove(user);
+            var clientToDelete = _context.Clients.SingleOrDefault(c => c.Id == clientId);
+            if (clientToDelete == null) return false;
+
+            _context.Clients.Remove(clientToDelete);
             _context.SaveChanges();
+            return true;
         }
 
-        
-
+        public bool DeleteUser(int ClientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

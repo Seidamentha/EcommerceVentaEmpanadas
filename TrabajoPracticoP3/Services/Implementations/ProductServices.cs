@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.Generic;
 using System.Linq;
 using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.DBContext;
@@ -15,48 +16,46 @@ namespace TrabajoPracticoP3.Services.Implementations
             _context = context;
         }
 
-        public int CreateProduct(Product product)
+        public int AddProduct(Product product)
         {
             _context.Add(product);
             _context.SaveChanges();
-            return product.IdProduct;
+            return product.Id;
         }
 
-        public void DeleteProduct(int productId)
+        public bool DeleteProduct(int productId)
         {
-            var productToDelete = _context.Products.SingleOrDefault(p => p.IdProduct == productId);
-            if (productToDelete != null)
-            {
+            var productToDelete = _context.Products.SingleOrDefault(p => p.Id == productId);
+            if (productToDelete == null) return false;
+            
                 _context.Remove(productToDelete);
-                _context.SaveChanges();
-            }
+                int changes = _context.SaveChanges();
+            
+            return changes > 0;
         }
 
+        public Product GetProductById(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                throw new Exception($"No se encontró el producto con ID {id}");
+            }
+
+            return product;
+        }
         public List<Product> GetAllProducts()
         {
             return _context.Products.ToList();
         }
 
-        public Product GetProductById(int id)
-        {
-            return _context.Products.FirstOrDefault(p => p.IdProduct == id);
-        }
 
         public int UpdateProduct(Product product)
         {
-            var existingProduct = _context.Products.SingleOrDefault(p => p.IdProduct == product.IdProduct);
-
-            if (existingProduct == null)
-            {
-                return 0;
-            }
-
-            existingProduct.NameProduct = product.NameProduct;
-            existingProduct.Price = product.Price;
-
-            _context.Update(existingProduct);
-            _context.SaveChanges();
-            return existingProduct.IdProduct;
+            _context.Products.Update(product);
+            return _context.SaveChanges(); // Devuelve el número de filas afectadas
         }
+
     }
 }

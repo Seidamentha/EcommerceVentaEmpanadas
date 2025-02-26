@@ -7,6 +7,9 @@ using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Models;
 using TrabajoPracticoP3.Services.Implementations;
 
+
+[ApiController]
+[Route("api/[controller]")]
 public class AuthenticateController : ControllerBase
 {
     private readonly UserServices _userServices;

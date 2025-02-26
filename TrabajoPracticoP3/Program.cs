@@ -1,16 +1,20 @@
-using TrabajoPracticoP3.DBContext;
+ using TrabajoPracticoP3.DBContext;
 using Microsoft.EntityFrameworkCore;
 using TrabajoPracticoP3.Services.Interfaces;
 using TrabajoPracticoP3.Services.Implementations;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
+
+
+
 
 builder.Services.AddSwaggerGen(setupAction =>
 {
@@ -45,6 +49,7 @@ builder.Services.AddScoped<IAdminServices, AdminServices>();
 builder.Services.AddScoped<IOrderServices, OrderServices>();
 builder.Services.AddScoped<ISaleOrderLineServices, SaleOrderLineServices>();
 #endregion
+builder.Services.AddScoped<IClientServices, ClientServices>();
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>

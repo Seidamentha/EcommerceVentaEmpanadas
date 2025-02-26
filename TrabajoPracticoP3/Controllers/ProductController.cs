@@ -24,7 +24,7 @@ namespace TrabajoPracticoP3.Controllers
         [HttpGet("GetAllProducts")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetAllProductos()
+        public IActionResult GetAllProducts()
         {
             try
             {
@@ -80,11 +80,11 @@ namespace TrabajoPracticoP3.Controllers
 
                 var newProduct = new Product
                 {
-                    NameProduct = productDto.NameProduct,
+                    Name = productDto.Name,
                     Price = productDto.Price,
                 };
 
-                int id = _productServices.CreateProduct(newProduct);
+                int id = _productServices.AddProduct(newProduct);
                 return Ok(new { ProductId = id });
             }
             catch (Exception ex)
@@ -116,7 +116,7 @@ namespace TrabajoPracticoP3.Controllers
                 var productToUpdate = new Product
                 {
                     IdProduct = idProduct,
-                    NameProduct = product.NameProduct,
+                    Name = product.Name,
                     Price = product.Price,
                 };
 
