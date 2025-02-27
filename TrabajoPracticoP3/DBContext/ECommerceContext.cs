@@ -1,46 +1,48 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Enum;
-using System.Linq;
-
 
 namespace TrabajoPracticoP3.DBContext
 {
     public class ECommerceContext : DbContext
     {
-        
-
         public DbSet<User> Users { get; set; }
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<SaleOrderLine> SaleOrderLines { get; set; }  // Añadido aquí
 
-        public DbSet<SaleOrderLine> SaleOrderLines { get; set; }
         public ECommerceContext(DbContextOptions<ECommerceContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
-            // Definir la jerarquía de User con Discriminator
+            // Herencia con Discriminator
             modelBuilder.Entity<User>()
-                .HasDiscriminator<UserType>("UserType");
+                .Property(u => u.UserType)
+                .HasConversion<string>();
+
+
+
+                modelBuilder.Entity<User>()
+                .HasDiscriminator<string>("UserType")
+                .HasValue<Admin>("Admin")
+                .HasValue<Client>("Client")
+                .HasValue<Seller>("Seller");
 
             // Insertamos datos iniciales en la base de datos
             modelBuilder.Entity<Admin>().HasData(new Admin
             {
                 Id = 1,
-                Name = "Amentha",
+                Name = "Amnetha",
                 SurName = "Seide",
-                Email = "Amentha@gmail.com",
+                Email = "amnetha@gmail.com",
                 UserName = "Tatie",
-                UserType = UserType.Admin,
-                Password = "987654"
-
+                UserType = UserType.Admin.ToString(),
+                Password = "987654" // ⚠️ Reemplazar con un hash en la lógica de negocio
             });
 
             modelBuilder.Entity<Client>().HasData(
@@ -49,10 +51,10 @@ namespace TrabajoPracticoP3.DBContext
                     Id = 2,
                     Name = "Sofia",
                     SurName = "Mazzurco",
-                    Email = "Sofi@gmail.com",
+                    Email = "sofi@gmail.com",
                     UserName = "Tutti",
-                    UserType = UserType.Client,
-                    Password = "123321",
+                    UserType = UserType.Client.ToString(),
+                    Password = "123321", // ⚠️ Reemplazar con un hash
                     PhoneNumber = "3415123212",
                     Adress = "Pellegrini 211"
                 },
@@ -61,10 +63,10 @@ namespace TrabajoPracticoP3.DBContext
                     Id = 3,
                     Name = "Guido",
                     SurName = "Montenegro",
-                    Email = "Guido@gmail.com",
+                    Email = "guido@gmail.com",
                     UserName = "Monzón",
-                    UserType = UserType.Client,
-                    Password = "554466",
+                    UserType = UserType.Client.ToString(),
+                    Password = "554466", // ⚠️ Reemplazar con un hash
                     PhoneNumber = "3415123333",
                     Adress = "Mendoza 211"
                 }
@@ -73,47 +75,49 @@ namespace TrabajoPracticoP3.DBContext
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
-                    IdProduct = 1,
-                    Name = "Empanada de verduras",
+                    Id = 1,
+                    Name = "Empanada de Verduras",
                     Price = 300
                 },
                 new Product
                 {
-                    IdProduct= 2,
-                    Name= "Emoanada de JAmón y Queso",
+                    Id = 2,
+                    Name = "Empanada de Jamón y Queso",
                     Price = 500
                 },
                 new Product
                 {
-                    IdProduct = 3,
+                    Id = 3,
                     Name = "Empanada de Carne",
                     Price = 400
                 }
             );
 
+            // Relaciones
 
-            // Relación 1:N entre Order y SaleOrderLine (una orden tiene muchas líneas de pedido)
+            // Relación 1:N entre Order y SaleOrderLine
             modelBuilder.Entity<SaleOrderLine>()
                 .HasOne(sol => sol.Order)
-                .WithMany(o => o.SaleOrderLines) // Una orden puede tener muchas líneas
-                .HasForeignKey(sol => sol.OrderId);
+                .WithMany(o => o.SaleOrderLines)
+                .HasForeignKey(sol => sol.OrderId)
+                .OnDelete(DeleteBehavior.Cascade); // Para que se eliminen en cascada si la orden se borra
 
-            // Relación 1:N entre Product y SaleOrderLine (un producto puede estar en muchas líneas de pedido)
+            // Relación 1:N entre Product y SaleOrderLine
             modelBuilder.Entity<SaleOrderLine>()
                 .HasOne(sol => sol.Product)
                 .WithMany(p => p.SaleOrderLines)
-                .HasForeignKey(sol => sol.ProductId);
+                .HasForeignKey(sol => sol.ProductId)
+                .OnDelete(DeleteBehavior.Restrict); // Para evitar la eliminación accidental de productos en uso
 
-            // Relación 1:N entre Client y Order (un cliente puede hacer muchas órdenes)
+            // Relación 1:N entre Client y Order
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Client)
                 .WithMany(c => c.Orders)
-                .HasForeignKey(o => o.ClientId);
+                .HasForeignKey(o => o.ClientId)
+                .OnDelete(DeleteBehavior.Cascade); // Si se elimina un cliente, también sus órdenes
 
             base.OnModelCreating(modelBuilder);
-
         }
     }
 }
-
 

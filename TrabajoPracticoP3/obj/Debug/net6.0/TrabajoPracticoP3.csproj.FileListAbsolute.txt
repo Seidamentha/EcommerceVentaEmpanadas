@@ -1306,3 +1306,5 @@ C:\Users\frant\OneDrive\Desktop\amentha\GITeCOMMERCE\TrabajoPracticoP3\obj\Debug
 C:\Users\frant\OneDrive\Desktop\amentha\GITeCOMMERCE\TrabajoPracticoP3\obj\Debug\net6.0\TrabajoPracticoP3.pdb
 C:\Users\frant\OneDrive\Desktop\amentha\GITeCOMMERCE\TrabajoPracticoP3\obj\Debug\net6.0\TrabajoPracticoP3.genruntimeconfig.cache
 C:\Users\frant\OneDrive\Desktop\amentha\GITeCOMMERCE\TrabajoPracticoP3\obj\Debug\net6.0\ref\TrabajoPracticoP3.dll
+C:\Users\frant\OneDrive\Desktop\amentha\GITeCOMMERCE\TrabajoPracticoP3\bin\Debug\net6.0\Microsoft.Bcl.Memory.dll
+C:\Users\frant\OneDrive\Desktop\amentha\GITeCOMMERCE\TrabajoPracticoP3\bin\Debug\net6.0\Microsoft.Bcl.TimeProvider.dll

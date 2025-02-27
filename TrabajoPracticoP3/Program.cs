@@ -5,15 +5,19 @@ using TrabajoPracticoP3.Services.Implementations;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TrabajoPracticoP3.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUserServices, UserServices>();
 
 builder.Services.AddEndpointsApiExplorer();
 
-
+builder.Services.AddDbContext<ECommerceContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 builder.Services.AddSwaggerGen(setupAction =>

@@ -2,8 +2,10 @@
 {
     public enum UserType
     {
-        Client,
+        
+       
+        Admin,
         Seller,
-        Admin
+        Client
     }
 }

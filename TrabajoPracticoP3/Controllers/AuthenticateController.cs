@@ -3,26 +3,29 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using TrabajoPracticoP3.Data.Entities;
 using TrabajoPracticoP3.Data.Models;
 using TrabajoPracticoP3.Services.Implementations;
+using TrabajoPracticoP3.Services.Interfaces;
+
 
 
 [ApiController]
 [Route("api/[controller]")]
 public class AuthenticateController : ControllerBase
 {
-    private readonly UserServices _userServices;
+    private readonly IUserServices _userServices;
     private readonly IConfiguration _config;
 
-    public AuthenticateController(UserServices userServices, IConfiguration configuration)
+    public AuthenticateController(IUserServices userServices, IConfiguration config)
     {
         _userServices = userServices;
-        _config = configuration;
+        _config = config;
     }
 
-    [HttpPost]
-    public IActionResult Authenticate([FromBody] CredentialsDto credentialsDto)
+    [HttpPost("Login")]
+    public IActionResult Login([FromBody] CredentialsDto credentialsDto)
     {
         // Paso 1: Validamos las credenciales
         BaseResponse validarUsuarioResult = _userServices.ValidarUsuario(credentialsDto.Email, credentialsDto.Password);

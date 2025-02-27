@@ -16,7 +16,7 @@ namespace TrabajoPracticoP3.Data.Entities
         public string? Name { get; set; }
         public string? SurName { get; set; }
         public string? Email { get; set; }
-        public UserType UserType { get; set; }
+        public string UserType { get; set; }
         public string? Adress { get; set; }
        
 
